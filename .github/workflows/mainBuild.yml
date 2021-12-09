@@ -21,6 +21,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build ./app -t atsea:latest
+      run: docker build ./app -t ${{secrets.DOCKER_USER}}/atsea:latest
     - name: Docker push
       run: docker push ${{secrets.DOCKER_USER}}/atsea:latest
