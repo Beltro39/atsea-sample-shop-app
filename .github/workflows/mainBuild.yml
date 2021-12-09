@@ -29,4 +29,4 @@ jobs:
     - name: Build the Docker image reverse_proxy
       run: docker build ./reverse_proxy -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:GITHUB_SHA   
     - name: Docker push
-      run: docker push -a ${{secrets.DOCKER_USER}}/atsea:GITHUB_SHA   
+      run: docker push -a   
