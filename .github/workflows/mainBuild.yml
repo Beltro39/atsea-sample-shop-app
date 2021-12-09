@@ -21,12 +21,12 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image app
-      run: docker build ./app -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:GITHUB_SHA
+      run: docker build ./app -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:$GITHUB_SHA
     - name: Build the Docker image database
-      run: docker build ./database -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:GITHUB_SHA
+      run: docker build ./database -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:$GITHUB_SHA
     - name: Build the Docker image payment_gateaway
-      run: docker build ./payment_gateway -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:GITHUB_SHA
+      run: docker build ./payment_gateway -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:$GITHUB_SHA
     - name: Build the Docker image reverse_proxy
-      run: docker build ./reverse_proxy -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:GITHUB_SHA   
+      run: docker build ./reverse_proxy -t ${{secrets.DOCKER_USER}}/atsea:latest -t ${{secrets.DOCKER_USER}}/atsea:$GITHUB_SHA   
     - name: Docker push
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea
