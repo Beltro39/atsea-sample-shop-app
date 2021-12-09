@@ -28,8 +28,11 @@ jobs:
       run: docker build ./payment_gateway -t ${{secrets.DOCKER_USER}}/atsea-payment_gateaway:latest -t ${{secrets.DOCKER_USER}}/atsea-payment_gateaway:$GITHUB_SHA 
     - name: Build the Docker image reverse_proxy
       run: docker build ./reverse_proxy -t ${{secrets.DOCKER_USER}}/atsea-reverse_proxy:latest -t ${{secrets.DOCKER_USER}}/atsea-reverse_proxy:$GITHUB_SHA 
-    - name: Docker push
+    - name: Docker push app
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-app
+    - name: Docker push database  
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-database
+    - name: Docker push payment_gateaway   
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-payment_gateaway
+    - name: Docker push reverse_proxy  
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-reverse_proxy
