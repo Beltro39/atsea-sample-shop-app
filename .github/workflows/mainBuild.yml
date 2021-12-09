@@ -21,6 +21,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Docker build
-      run: docker build --file Dockerfile ./app
+      run: docker build --file Dockerfile /app
     - name: Docker push
       run: docker push ${{secrets.DOCKER_USER}}/atsea:latest
