@@ -43,7 +43,11 @@ services:
       - payment
     secrets:
       - payment_token
-
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+    command: --interval 30     
 networks:
   front-tier:
   back-tier:
