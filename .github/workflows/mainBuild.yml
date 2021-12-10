@@ -37,10 +37,10 @@ jobs:
     - name: Docker push reverse_proxy  
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-reverse_proxy
     - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa
-          known_hosts: unnecessary
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        name: id_rsa
+        known_hosts: unnecessary
     - name: rsync over ssh
       run: ./deploy_to_aws.sh  
