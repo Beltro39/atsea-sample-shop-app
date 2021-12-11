@@ -1,5 +1,6 @@
 echo 'Starting to Deploy...'
 ssh ec2-user@3.16.232.152 "
+        sudo systemctl start docker
         sudo docker image prune -f 
         cd sbeltrana/atsea-sample-shop-app
         sudo docker-compose down
