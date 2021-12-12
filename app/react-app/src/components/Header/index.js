@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css'
 
 const Header = () => {
-  const title = 'Welcome to the FIREFOX-M shop'
+  const title = 'Welcome to the FIREFOX-MS shop'
   const subtitle = ''
   return (
     <div className='headerSection'>
