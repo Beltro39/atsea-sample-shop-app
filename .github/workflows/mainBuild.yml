@@ -19,8 +19,10 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots verify -f ./app
+
     - name: Docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -43,20 +45,32 @@ jobs:
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-payment_gateaway
     - name: Docker push reverse_proxy  
       run: docker push -a ${{secrets.DOCKER_USER}}/atsea-reverse_proxy
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}  
+
     - name: Start EC2 with AWS CLI
       run: |
-        aws ec2 start-instances --instance-ids i-090a1c4ff807dff55    
+        aws ec2 start-instances --instance-ids i-090a1c4ff807dff55   
+
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.SSH_KEY }}
         name: id_rsa
         known_hosts: ${{secrets.KNOWN_HOSTS}}
+
     - name: rsync over ssh
       run: ./deploy_to_aws.sh  
+
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        repository: Beltro39/testAsis
+        event-type: run-test  
+    
